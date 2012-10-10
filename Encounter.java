@@ -9,6 +9,7 @@ import java.util.ArrayList;
  * Time: 8:26 PM
  * To change this template use File | Settings | File Templates.
  */
+//Push test
 public class Encounter {
     public static void   function(ArrayList<Person> Group1,ArrayList<Person> Group2 ){
 

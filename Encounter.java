@@ -11,8 +11,8 @@ import java.util.ArrayList;
  */
 //Push test
 public class Encounter {
-    public static void   function(ArrayList<Person> Group1,ArrayList<Person> Group2 ){
-
+    public static void encounter(ArrayList<Person> Group1,ArrayList<Person> Group2 ){
+    	Group1.remove(1);
     }
 
 }

@@ -16,5 +16,7 @@ public class main {
         System.out.print(listOne.size());
         Encounter.encounter(listOne,listOne);
         System.out.print(listOne.size());
+        
+        //testing new push
     }
 }

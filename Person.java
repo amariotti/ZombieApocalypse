@@ -1,6 +1,7 @@
 package ZombieApocalypse;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,13 +12,33 @@ import java.io.PrintStream;
  */
 public class Person {
     private String name;
-    private int health ;
+    private int health;
     private int strength;
     private int speed;
     private int hunger;
     private int fatigue;
-    private boolean  infected;
+    private boolean infected;
     private int ninjaSkill;
+    
+    static ArrayList<Person> alPerson = new ArrayList<Person>();
+	public static ArrayList<Person> alZombie = new ArrayList<Person>();
+    
+	public Person()
+	{
+		
+	}
+	
+    public Person(boolean infectedStatus)
+    {
+    	name = "fakeName";
+        health = RandNum.go(1,100);
+        strength = RandNum.go(1,100);
+        speed = RandNum.go(1,100);
+        hunger = RandNum.go(1,100);
+        fatigue = RandNum.go(1,100);
+        infected = infectedStatus;
+        ninjaSkill = RandNum.go(1,100);
+    }
 
     public Person(String name, int health, int strength, int hunger, int speed, int fatigue, boolean infected, int ninjaSkill) {
         this.name = name;
@@ -28,10 +49,6 @@ public class Person {
         this.fatigue = fatigue;
         this.infected = infected;
         this.ninjaSkill = ninjaSkill;
-    }
-
-    public Person() {
-
     }
 
     public String getName() {
@@ -99,6 +116,31 @@ public class Person {
     }
 
 
-
+    public static void createIndividuals(int count, boolean infected)
+    {
+    	for (int i = 0; i < count; i++)
+        {
+    		Person individual = new Person(infected);
+    		
+    		if (infected == true)
+    			alZombie.add(individual);
+    		else
+    			alPerson.add(individual);
+		}
+    }
+    
+    public static void outputIndividuals()
+    {
+    	System.out.println(); //Temporary hard return
+    	for(Person d:alPerson) {
+        	System.out.println("Zombie: -- Health: " + d.getHealth() + ", Strength: " + d.getStrength() + ", Fatigue: " + d.getFatigue() + ", Hunger: " + d.getHunger());
+    	}
+    	
+    	System.out.println(); //Temporary hard return
+    	
+        for(Person d:alZombie) {
+        	System.out.println("Person: -- Health: " + d.getHealth() + ", Strength: " + d.getStrength() + ", Fatigue: " + d.getFatigue() + ", Hunger: " + d.getHunger());
+    	}
+    }
 
 }

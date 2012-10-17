@@ -1,32 +1,28 @@
 package ZombieApocalypse;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class main {
 
     public static void main(String[] args) {
-        ArrayList<Person> alZombie = new ArrayList<Person>();
-        ArrayList<Person> alPerson = new ArrayList<Person>();
+    	
+    	Scanner scan = new Scanner(System.in);
+    	
+    	System.out.println("Welcome to");
+    	System.out.println("The Zombie Apocalypse Creator¨\n");
+    	
+    	System.out.println("How many zombies would you like to create?");
+		int zCount = scan.nextInt();
+		
+		System.out.println("How many people would you like to create?");
+		int pCount = scan.nextInt();
+    	
+		Person.createIndividuals(zCount, true);
+		Person.createIndividuals(pCount, false);
         
-        for (int i = 0; i < 40; i++)
-        {
-        	int randomInfected = RandNum.go(1,2);
-        	
-        	if(randomInfected == 1)
-        	{
-        		Person zombie = new Person("zombie",100,100,100,100,100,true,100);
-        		alZombie.add(zombie);
-        	}
-        	else
-        	{
-        		Person person = new Person("person",100,100,100,100,100,false,100);
-        		alPerson.add(person);
-        	}
-		}
-        
-        System.out.println("Zombie Count: " + alZombie.size());
-        System.out.println("Person Count: " + alPerson.size());
-        
+		Person.outputIndividuals();
+		
         //Encounter.encounter(listOne,listOne);
         //run an encounter
     }

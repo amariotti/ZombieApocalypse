@@ -19,4 +19,16 @@ public class RandNum
 		Random num = new Random();
 		return num.nextInt(max - min + 1) + min;
 	}
+	
+	/**
+	 * Method to retrieve a random boolean
+	 * @return
+	 */
+	public static boolean goBool()
+	{
+		Random num = new Random();
+		int randomInt = num.nextInt(2);
+		
+		return (randomInt == 0) ? false : true;
+	}
 }

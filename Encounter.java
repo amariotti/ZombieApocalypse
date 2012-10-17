@@ -2,6 +2,8 @@ package ZombieApocalypse;
 
 import java.util.ArrayList;
 
+
+
 /**
  * Created with IntelliJ IDEA.
  * User: Lappy
@@ -11,8 +13,26 @@ import java.util.ArrayList;
  */
 //Push test
 public class Encounter {
-    public static void encounter(ArrayList<Person> Group1,ArrayList<Person> Group2 ){
-    	Group1.remove(1);
+	
+	
+	
+	
+	
+    public static void encounter(ArrayList<Person> Group1,ArrayList<Person> Group2 )
+    {
+    	  	//zombie vs people
+    		
+    	
+    	
+    	
+    	
+    	
+    	
     }
+    
+//    private ArrayList<Person> getfighters(ArrayList<Person> tempGroup)
+//    {
+//    	
+//    }
 
 }

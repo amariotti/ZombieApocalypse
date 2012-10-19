@@ -5,6 +5,36 @@ import java.util.Scanner;
 
 public class main {
 
+	static ArrayList<Person> alPerson = new ArrayList<Person>();
+	static ArrayList<Person> alZombie = new ArrayList<Person>();
+	
+	public static void createIndividuals(int count, boolean infected)
+    {
+    	for (int i = 0; i < count; i++)
+        {
+    		Person individual = new Person(infected);
+    		
+    		if (infected == true)
+    			alZombie.add(individual);
+    		else
+    			alPerson.add(individual);
+		}
+    }
+    
+    public static void outputIndividuals()
+    {
+    	System.out.println(); //Temporary hard return
+    	for(Person d:alPerson) {
+        	System.out.println("Zombie: -- Health: " + d.getHealth() + ", Strength: " + d.getStrength() + ", Fatigue: " + d.getFatigue() + ", Hunger: " + d.getHunger());
+    	}
+    	
+    	System.out.println(); //Temporary hard return
+    	
+        for(Person d:alZombie) {
+        	System.out.println("Person: -- Health: " + d.getHealth() + ", Strength: " + d.getStrength() + ", Fatigue: " + d.getFatigue() + ", Hunger: " + d.getHunger());
+        }
+    }
+	
     public static void main(String[] args) {
     	
     	Scanner scan = new Scanner(System.in);
@@ -18,12 +48,14 @@ public class main {
 		System.out.println("How many people would you like to create?");
 		int pCount = scan.nextInt();
     	
-		Person.createIndividuals(zCount, true);
-		Person.createIndividuals(pCount, false);
+		createIndividuals(zCount, true);
+		createIndividuals(pCount, false);
         
-		Person.outputIndividuals();
+		outputIndividuals();
 		
         //Encounter.encounter(listOne,listOne);
         //run an encounter
+		
+		
     }
 }

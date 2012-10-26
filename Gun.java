@@ -9,7 +9,12 @@ package ZombieApocalypse;
  */
 public class Gun extends Weapons{
     private int ammo;
-
+    
+    public Gun()
+    {
+    	super(RandNum.go(1,10), RandNum.go(1,10), RandNum.go(1,10));
+        this.ammo = RandNum.go(1,40);
+    }
 
     public Gun(int durability, int power, int range, int ammo) {
         super(durability, power, range);

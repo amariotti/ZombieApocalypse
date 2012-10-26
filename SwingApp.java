@@ -1,6 +1,7 @@
 package ZombieApocalypse;
 
 import java.awt.EventQueue;
+import java.awt.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,11 +29,19 @@ public class SwingApp {
     	for (int i = 0; i < count; i++)
         {
     		Person individual = new Person(infected);
+    		ArrayList<Gun> alGuns = new ArrayList<Gun>();
     		
     		if (infected == true)
     			alZombie.add(individual);
     		else
     			alPerson.add(individual);
+    		
+    		if (RandNum.goBool()) //Random bool to determine if this person/zombie has a weapon or not
+    		{
+    			Gun g = new Gun();
+    			alGuns.add(g);
+    			textArea.append("Gun: -- Durability: " + g.getDurability() + ", Power: " + g.getPower() + ", Range: " + g.getRange() + "\n");
+    		}
 		}
     }
     

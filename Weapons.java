@@ -8,9 +8,9 @@ package ZombieApocalypse;
  * To change this template use File | Settings | File Templates.
  */
     abstract class Weapons {
-    private int durability;
-    private int power;
-    private int range;
+    private int durability; //Scale of 1-10
+    private int power; //Scale of 1-10
+    private int range; //Scale of 1-10
 
     protected Weapons() {
     }

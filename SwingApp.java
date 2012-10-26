@@ -71,6 +71,7 @@ public class SwingApp {
 	 */
 	public SwingApp() {
 		initialize();
+		textArea.setText("");
 	}
 
 	/**
@@ -115,6 +116,12 @@ public class SwingApp {
 		btnGo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				
+				//Clears the text inputs as well as the arraylists
+				textArea.setText("");
+				alPerson.clear();
+				alZombie.clear();
+				
 				createIndividuals(Integer.parseInt(textField.getText()), true);
 				createIndividuals(Integer.parseInt(textField_1.getText()), false);
 		        

@@ -17,12 +17,13 @@ import javax.swing.JTextArea;
 public class SwingApp {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField tfPersonCount;
+	private JTextField tfZombieCount;
 	private static JTextArea textArea;
 	
 	static ArrayList<Person> alPerson = new ArrayList<Person>();
 	static ArrayList<Person> alZombie = new ArrayList<Person>();
+	private JTextField tfDayCount;
 	
 	public static void createIndividuals(int count, boolean infected)
     {
@@ -81,6 +82,16 @@ public class SwingApp {
 	public SwingApp() {
 		initialize();
 		textArea.setText("");
+		
+		tfDayCount = new JTextField();
+		tfDayCount.setColumns(10);
+		tfDayCount.setBounds(154, 201, 134, 28);
+		frame.getContentPane().add(tfDayCount);
+		
+		JLabel lblHowManyDays = new JLabel("How many days would you like the battle to last?");
+		lblHowManyDays.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHowManyDays.setBounds(20, 181, 407, 16);
+		frame.getContentPane().add(lblHowManyDays);
 	}
 
 	/**
@@ -88,7 +99,7 @@ public class SwingApp {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 434);
+		frame.setBounds(100, 100, 450, 513);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -97,47 +108,47 @@ public class SwingApp {
 		lblWelcomeToZombie.setBounds(20, 14, 407, 29);
 		frame.getContentPane().add(lblWelcomeToZombie);
 		
-		JLabel lblFirstTellMe = new JLabel("First, tell me how many civilians you'd like to create:");
+		JLabel lblFirstTellMe = new JLabel("How many civilians would you like to create?");
 		lblFirstTellMe.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFirstTellMe.setBounds(20, 57, 407, 16);
 		frame.getContentPane().add(lblFirstTellMe);
 		
-		JLabel lblNextTellMe = new JLabel("Next, tell me how many zombies you'd like to create:");
+		JLabel lblNextTellMe = new JLabel("How many zombies would you like me to create?");
 		lblNextTellMe.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNextTellMe.setBounds(21, 117, 407, 16);
 		frame.getContentPane().add(lblNextTellMe);
 		
-		textField = new JTextField();
-		textField.setBounds(154, 79, 134, 28);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		tfPersonCount = new JTextField();
+		tfPersonCount.setBounds(154, 77, 134, 28);
+		frame.getContentPane().add(tfPersonCount);
+		tfPersonCount.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(154, 141, 134, 28);
-		frame.getContentPane().add(textField_1);
+		tfZombieCount = new JTextField();
+		tfZombieCount.setColumns(10);
+		tfZombieCount.setBounds(154, 137, 134, 28);
+		frame.getContentPane().add(tfZombieCount);
 		
 		textArea = new JTextArea();
-		textArea.setBounds(27, 215, 383, 177);
+		textArea.setBounds(31, 283, 383, 177);
 		frame.getContentPane().add(textArea);
 		
-		JButton btnGo = new JButton("GO!");
+		JButton btnGo = new JButton("FIGHT!");
 		btnGo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				
-				//Clears the text inputs as well as the arraylists
+				//Clears the text inputs as well as the ArrayLists
 				textArea.setText("");
 				alPerson.clear();
 				alZombie.clear();
 				
-				createIndividuals(Integer.parseInt(textField.getText()), true);
-				createIndividuals(Integer.parseInt(textField_1.getText()), false);
+				createIndividuals(Integer.parseInt(tfPersonCount.getText()), true);
+				createIndividuals(Integer.parseInt(tfZombieCount.getText()), false);
 		        
 				outputIndividuals();
 			}
 		});
-		btnGo.setBounds(162, 175, 117, 29);
+		btnGo.setBounds(158, 246, 117, 29);
 		frame.getContentPane().add(btnGo);
 	}
 }

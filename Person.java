@@ -103,6 +103,13 @@ public class Person {
 
     public void setInfected(boolean infected) {
         this.infected = infected;
+        if(infected)
+        {
+        	setStrength(getStrength()+PersonStatsTypes.zombieStrengthNumarator);
+        	setSpeed(getSpeed()+PersonStatsTypes.zombieSpeedNumarator);
+        	setHealth(getHealth()+ RandNum.go(1, 50));
+        }
+        
     }
 
     public int getNinjaSkill() {

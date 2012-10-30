@@ -46,18 +46,73 @@ public class Encounter {
     }
     private static void zombieVsPerson(ArrayList<Person> zombies,ArrayList<Person> people )
     {
-    	if((getMilitaryPeopleCount(people)*2)+getNormalPeopleCount(people)> zombies.size())
+    	while((getMilitaryPeopleCount(people)*2)+getNormalPeopleCount(people)> zombies.size())//fight
     	{
+    		int personIndex = RandNum.go(0, people.size()-1);
+    		int zombieIndex = RandNum.go(0, zombies.size()-1);
+    		String whoWon = personZombieFight(people.get(personIndex),zombies.get(zombieIndex));
+    		if(whoWon=="person")//if person won remove zombie and add
+    		{
+    			zombies.remove(zombieIndex);
+    			//add experence when they win
+    			people.get(personIndex).setNinjaSkill(people.get(personIndex).getNinjaSkill()+PersonStatsTypes.peopleRoundExperence);
+    			
+    		}
+    		else
+    		{
+    			//might want to look to see if we can not convert based on health after we add weapons
+    			people.get(personIndex).setInfected(true);//make them zombie
+    			zombies.add(people.get(personIndex));//add to zombie array
+    			people.remove(personIndex);// take them out of person array
+    		
+    		}
+    	}
+    	    	
+    }
+    
+    private static String personZombieFight(Person tempPerson, Person tempzombie)
+    {
+    	while(tempPerson.getHealth() > 0 || tempzombie.getHealth() > 0 )//tell person or zombie is dead
+    	{
+    		if(tempPerson.getSpeed() >= tempzombie.getSpeed())//who goes first person has advanatage zombies are slow
+    		{
+    			//person attacks 
+    			tempzombie.setHealth(tempzombie.getHealth()-(caculateDamage(tempPerson)));
+    		}
+    		else
+    		{//zombie attacks
+    			tempPerson.setHealth(tempPerson.getHealth()-(caculateDamage(tempzombie)));
+    		}
+    	}
+    	if(tempPerson.getHealth()>0)
+    	{
+    		return "person";
     		
     	}
     	else
     	{
-    		
+    		return "zombie";
     	}
-    	
+    		
     }
    
-    private static int getMilitaryPeopleCount(ArrayList<Person> tempGroup)
+    private static int caculateDamage(Person damagePerson)
+    {
+    	if(damagePerson.isInfected())//zombie
+    	{	//slow zombies hurt less
+    		return (damagePerson.getStrength()-(PersonStatsTypes.zombieDamageReducer-damagePerson.getSpeed()));
+    	}
+    	else//person
+    	{
+    		return damagePerson.getNinjaSkill()+ getWeponDamage(damagePerson);
+    	}
+		
+	}
+	private static int getWeponDamage(Person damagePerson) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	private static int getMilitaryPeopleCount(ArrayList<Person> tempGroup)
     {
     	int count = 0;
     	for(int i=0;i<tempGroup.size();i++)

@@ -144,6 +144,8 @@ public class SwingApp {
 				
 				createIndividuals(Integer.parseInt(tfPersonCount.getText()), true);
 				createIndividuals(Integer.parseInt(tfZombieCount.getText()), false);
+				
+				Encounter.encounter(alPerson, alZombie);
 		        
 				outputIndividuals();
 			}

@@ -105,8 +105,8 @@ public class Person {
         this.infected = infected;
         if(infected)
         {
-        	setStrength(getStrength()+PersonStatsTypes.zombieStrengthNumarator);
-        	setSpeed(getSpeed()+PersonStatsTypes.zombieSpeedNumarator);
+        	setStrength(getStrength()+PersonStatsTypes.zombieStrengthNumerator);
+        	setSpeed(getSpeed()+PersonStatsTypes.zombieSpeedNumerator);
         	setHealth(getHealth()+ RandNum.go(1, 50));
         }
         

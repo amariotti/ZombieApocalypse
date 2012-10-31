@@ -13,54 +13,50 @@ import java.util.ArrayList;
  */
 //Push test
 public class Encounter {
-	
-	
-	
-	
-
 		
     public static void encounter(ArrayList<Person> Group1,ArrayList<Person> Group2 )
-    {
-    	  	
+    {	
     	///////////////////This is for zombie vs person//////////////////////
-    	if(isZombieGroup(Group1)&& !isZombieGroup(Group2))
+    	if(isZombieGroup(Group1) && !isZombieGroup(Group2))
     	{
     		zombieVsPerson(Group1,Group2);
     	}
     	 ///////////////////This is for person vs person//////////////////////
-    	else if(!isZombieGroup(Group1)&& !isZombieGroup(Group2))
+    	else if(!isZombieGroup(Group1) && !isZombieGroup(Group2))
     	{
     		
     	}
     	 ///////////////////This is for zombie vs zombie//////////////////////
-    	else if(isZombieGroup(Group1)&& isZombieGroup(Group2))
+    	else if(isZombieGroup(Group1) && isZombieGroup(Group2))
     	{
     		
     	}
     	 ///////////////////This is for person vs zombie//////////////////////
-    	else if(!isZombieGroup(Group1)&& isZombieGroup(Group2))
+    	else if(!isZombieGroup(Group1) && isZombieGroup(Group2))
     	{
     		zombieVsPerson(Group2,Group1);
+    	}
+    	else{
+    		return;
     	}
     	
     }
     private static void zombieVsPerson(ArrayList<Person> zombies,ArrayList<Person> people )
     {
-    	while((getMilitaryPeopleCount(people)*2)+getNormalPeopleCount(people)> zombies.size())//fight
+    	while(((getMilitaryPeopleCount(people)*2) + getNormalPeopleCount(people)) > zombies.size())//fight
     	{
     		int personIndex = RandNum.go(0, people.size()-1);
     		int zombieIndex = RandNum.go(0, zombies.size()-1);
     		String whoWon = personZombieFight(people.get(personIndex),zombies.get(zombieIndex));
-    		if(whoWon=="person")//if person won remove zombie and add
+    		if(whoWon =="person")//if person won remove zombie and add
     		{
     			zombies.remove(zombieIndex);
-    			//add experence when they win
-    			people.get(personIndex).setNinjaSkill(people.get(personIndex).getNinjaSkill()+PersonStatsTypes.peopleRoundExperence);
-    			
+    			//TODO: add experience when they win
+    			people.get(personIndex).setNinjaSkill(people.get(personIndex).getNinjaSkill()+PersonStatsTypes.peopleRoundExperience);
     		}
     		else
     		{
-    			//might want to look to see if we can not convert based on health after we add weapons
+    			//TODO: might want to look to see if we can not convert based on health after we add weapons
     			people.get(personIndex).setInfected(true);//make them zombie
     			zombies.add(people.get(personIndex));//add to zombie array
     			people.remove(personIndex);// take them out of person array
@@ -77,11 +73,12 @@ public class Encounter {
     		if(tempPerson.getSpeed() >= tempzombie.getSpeed())//who goes first person has advanatage zombies are slow
     		{
     			//person attacks 
-    			tempzombie.setHealth(tempzombie.getHealth()-(caculateDamage(tempPerson)));
+    			tempzombie.setHealth(tempzombie.getHealth()-(calculateDamage(tempPerson)));
     		}
     		else
-    		{//zombie attacks
-    			tempPerson.setHealth(tempPerson.getHealth()-(caculateDamage(tempzombie)));
+    		{
+    			//zombie attacks
+    			tempPerson.setHealth(tempPerson.getHealth()-(calculateDamage(tempzombie)));
     		}
     	}
     	if(tempPerson.getHealth()>0)
@@ -96,7 +93,7 @@ public class Encounter {
     		
     }
    
-    private static int caculateDamage(Person damagePerson)
+    private static int calculateDamage(Person damagePerson)
     {
     	if(damagePerson.isInfected())//zombie
     	{	//slow zombies hurt less
@@ -109,7 +106,7 @@ public class Encounter {
 		
 	}
 	private static int getWeponDamage(Person damagePerson) {
-		// TODO Auto-generated method stub
+		// TODO: Auto-generated method stub
 		return 0;
 	}
 	private static int getMilitaryPeopleCount(ArrayList<Person> tempGroup)

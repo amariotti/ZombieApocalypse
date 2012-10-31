@@ -85,28 +85,32 @@ public class Encounter {
     	{
     		if(tempPerson.getSpeed() >= tempzombie.getSpeed())//who goes first person has advanatage zombies are slow
     		{
-    			System.out.println("person attacks");
-    			//person attacks 
     			if(calculateDamage(tempPerson) != 0)
     			{
+    				System.out.println("zombie attacks");
+    				//person attacks
     				tempzombie.setHealth(tempzombie.getHealth()-(calculateDamage(tempPerson)));
     			}
     			else
     			{
+    				System.out.println("person attacks");
+    				//zombie attacks
     				tempPerson.setHealth(tempPerson.getHealth()-(calculateDamage(tempzombie)));
     			}
     			
     		}
     		else
-    		{
-    			System.out.println("zombie attacks");
-    			//zombie attacks
+    		{    			
     			if(calculateDamage(tempzombie)!=0)
     			{
+    				System.out.println("zombie attacks");
+    				//zombie attacks
     				tempPerson.setHealth(tempPerson.getHealth()-(calculateDamage(tempzombie)));
     			}
     			else
     			{
+    				System.out.println("person attacks");
+    				//person attacks
     				tempzombie.setHealth(tempzombie.getHealth()-(calculateDamage(tempPerson)));
     			}
     			

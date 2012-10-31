@@ -25,13 +25,13 @@ public class main {
     {
     	System.out.println(); //Temporary hard return
     	for(Person d:alPerson) {
-        	System.out.println("Zombie: -- Health: " + d.getHealth() + ", Strength: " + d.getStrength() + ", Fatigue: " + d.getFatigue() + ", Hunger: " + d.getHunger());
+        	System.out.println("Person: -- Health: " + d.getHealth() + ", Strength: " + d.getStrength() + ", Fatigue: " + d.getFatigue() + ", Hunger: " + d.getHunger());
     	}
     	
     	System.out.println(); //Temporary hard return
     	
         for(Person d:alZombie) {
-        	System.out.println("Person: -- Health: " + d.getHealth() + ", Strength: " + d.getStrength() + ", Fatigue: " + d.getFatigue() + ", Hunger: " + d.getHunger());
+        	System.out.println("Zombie: -- Health: " + d.getHealth() + ", Strength: " + d.getStrength() + ", Fatigue: " + d.getFatigue() + ", Hunger: " + d.getHunger());
         }
     }
 	
@@ -51,6 +51,8 @@ public class main {
 		createIndividuals(zCount, true);
 		createIndividuals(pCount, false);
         
+		outputIndividuals();
+		Encounter.encounter(alPerson, alZombie);		        
 		outputIndividuals();
 		
         //Encounter.encounter(listOne,listOne);

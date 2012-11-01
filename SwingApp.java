@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 public class SwingApp {
 
@@ -20,6 +21,7 @@ public class SwingApp {
 	private JTextField tfPersonCount;
 	private JTextField tfZombieCount;
 	private static JTextArea textArea;
+	private static JScrollPane scrollPane;
 	
 	static ArrayList<Person> alPerson = new ArrayList<Person>();
 	static ArrayList<Person> alZombie = new ArrayList<Person>();
@@ -46,7 +48,7 @@ public class SwingApp {
 		}
     }
     
-    public static Boolean outputIndividuals()
+    public static void outputIndividuals()
     {
     	System.out.println(); //Temporary hard return
     	for(Person d:alPerson) {
@@ -56,9 +58,9 @@ public class SwingApp {
     	System.out.println(); //Temporary hard return
     	
         for(Person d:alZombie) {
-        	textArea.append("Zombie: -- Health: " + d.getHealth() + ", Strength: " + d.getStrength() + ", Fatigue: " + d.getFatigue() + ", Hunger: " + d.getHunger() + "\n");
+        	//textArea.append("Zombie: -- Health: " + d.getHealth() + ", Strength: " + d.getStrength() + ", Fatigue: " + d.getFatigue() + ", Hunger: " + d.getHunger() + "\n");
+        	scrollPane.add("Zombie: -- Health: " + d.getHealth() + ", Strength: " + d.getStrength() + ", Fatigue: " + d.getFatigue() + ", Hunger: " + d.getHunger() + "\n", scrollPane);
         }
-        return true;
     }
 	
 	/**
@@ -130,7 +132,7 @@ public class SwingApp {
 		frame.getContentPane().add(tfZombieCount);
 		
 		textArea = new JTextArea();
-		textArea.setBounds(31, 283, 383, 177);
+		textArea.setBounds(31, 283, 383, 59);
 		frame.getContentPane().add(textArea);
 		
 		JButton btnGo = new JButton("FIGHT!");
@@ -145,9 +147,10 @@ public class SwingApp {
 				
 				createIndividuals(Integer.parseInt(tfPersonCount.getText()), true);
 				createIndividuals(Integer.parseInt(tfZombieCount.getText()), false);
-				Boolean temp = outputIndividuals();
+				
+				outputIndividuals();
 				Encounter.encounter(alPerson, alZombie);		        
-				temp = outputIndividuals();
+				outputIndividuals();
 			}
 		});
 		btnGo.setBounds(158, 246, 117, 29);

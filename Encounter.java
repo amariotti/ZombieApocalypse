@@ -11,7 +11,6 @@ import java.util.ArrayList;
  * Time: 8:26 PM
  * To change this template use File | Settings | File Templates.
  */
-//Push test
 public class Encounter {
 		
     public static void encounter(ArrayList<Person> Group1,ArrayList<Person> Group2 )
@@ -60,8 +59,11 @@ public class Encounter {
     		{
     			//System.out.println("start if");
     			
+    			//Grabs a random person and zombie to fight
     			int personIndex = RandNum.go(0, people.size()-1);
         		int zombieIndex = RandNum.go(0, zombies.size()-1);
+        		
+        		//The random person and zombie are fighting and the winner is returned in a string
         		String whoWon = personZombieFight(people.get(personIndex),zombies.get(zombieIndex));
         		
         		if(whoWon =="person")//if person won remove zombie and add
@@ -71,19 +73,19 @@ public class Encounter {
         			//TODO: add experience when they win
         			people.get(personIndex).setNinjaSkill(people.get(personIndex).getNinjaSkill()+PersonStatsTypes.peopleFightExperience);
         		}
-        		else
+        		else //zombie won
         		{
         			System.out.println("zombie won");
         			//might want to look to see if we can not convert based on health after we add weapons
-        			if(people.get(personIndex).getHealth()<-15)//Ripped apart
+        			if(people.get(personIndex).getHealth()<-15) //Ripped apart
         			{
         				people.remove(personIndex);// take them out of person array
         			}
         			else//converted
         			{
-        				people.get(personIndex).setInfected(true);//make them zombie
-            			zombies.add(people.get(personIndex));//add to zombie array
-            			people.remove(personIndex);// take them out of person array
+        				people.get(personIndex).setInfected(true); //make them zombie
+            			zombies.add(people.get(personIndex)); //add to zombie array
+            			people.remove(personIndex); //take them out of person array
         				
         			}
         			
@@ -93,31 +95,31 @@ public class Encounter {
     		}
     		//System.out.println("loop");
     	}
-    	peopleRoundEnd(people);
+    	peopleRoundEnd(people); //People will rest and heal
     	System.out.println("done");
     	    	
     }
-    private static void peopleRoundEnd(ArrayList<Person> people)
+    private static void peopleRoundEnd(ArrayList<Person> people) //People will rest and heal
     {
     	 for(Person d:people) 
     	 {
-    		 if(d.getHealth() <90 )
+    		 if(d.getHealth() <90 ) //People above 90 health won't heal anymore
     		 {
     			 d.setHealth(d.getHealth()+PersonStatsTypes.roundHealth);
     		 }    		
-    		 d.setNinjaSkill(d.getNinjaSkill() + PersonStatsTypes.roundExperence);
+    		 d.setNinjaSkill(d.getNinjaSkill() + PersonStatsTypes.roundExperence); // gain experience for surviving the round
     	 }
     	
     }
     
-    private static String personZombieFight(Person tempPerson, Person tempzombie)
+    private static String personZombieFight(Person tempPerson, Person tempzombie) // Actual person vs zombie fight
     {
     	System.out.println("fight");
     	while(tempPerson.getHealth() > 0 && tempzombie.getHealth() > 0 )//tell person or zombie is dead
     	{
-    		if(tempPerson.getSpeed()+tempPerson.getNinjaSkill() >= tempzombie.getSpeed()+tempzombie.getStrength())//who goes first person has advanatage zombies are slow
+    		if(tempPerson.getSpeed()+tempPerson.getNinjaSkill() >= tempzombie.getSpeed()+tempzombie.getStrength()) //who goes first person has advantage zombies are slow
     		{
-    			if(calculateDamage(tempPerson) != 0)
+    			if(calculateDamage(tempPerson) != 0) // If they miss
     			{
     				//System.out.println("zombie attacks");
     				//person attacks
@@ -133,7 +135,7 @@ public class Encounter {
     		}
     		else
     		{    			
-    			if(calculateDamage(tempzombie)!=0)
+    			if(calculateDamage(tempzombie)!=0) // If they miss
     			{
     				//System.out.println("zombie attacks");
     				//zombie attacks
@@ -148,7 +150,7 @@ public class Encounter {
     			
     		}
     	}
-    	if(tempPerson.getHealth()>0)
+    	if(tempPerson.getHealth()>0) // Returns the winner
     	{
     		return "person";
     		
@@ -160,31 +162,31 @@ public class Encounter {
     		
     }
    
-    private static int calculateDamage(Person damagePerson)
+    private static int calculateDamage(Person damagePerson) //Determines the damage from the person or zombie
     {
     	int tempint;
-    	if(damagePerson.isInfected())//zombie
-    	{	//slow zombies hurt less
-    		tempint = (damagePerson.getStrength()-(PersonStatsTypes.zombieDamageReducer+damagePerson.getSpeed()));
-    		if(tempint >0)
+    	if(damagePerson.isInfected()) //zombie
+    	{	
+    		tempint = (damagePerson.getStrength()-(PersonStatsTypes.zombieDamageReducer+damagePerson.getSpeed())); //slow zombies hurt less
+    		if(tempint >0) // Hit
     		{
     			return tempint;
     		}
-    		else
+    		else // Miss
     		{
     			return 0;
     		}
     		
     	}
-    	else//person
+    	else //person
     	{
     		
-    		tempint = damagePerson.getNinjaSkill()+ getWeponDamage(damagePerson);
-    		if(tempint >0)
+    		tempint = damagePerson.getNinjaSkill()+ getWeponDamage(damagePerson); // Checks for skill of person/zombie
+    		if(tempint >0) // Hit
     		{
     			return tempint;
     		}
-    		else
+    		else // Miss
     		{
     			return 0;
     		}
@@ -192,6 +194,8 @@ public class Encounter {
     	}
 		
 	}
+    
+    // Returns damage of the weapon if they have one
 	private static int getWeponDamage(Person damagePerson) {
 		Gun tempgun = damagePerson.getHasGun();
 		if(tempgun!=null)
@@ -204,6 +208,8 @@ public class Encounter {
 		}
 		
 	}
+	
+	//Gets the count of the military in the group
 	private static int getMilitaryPeopleCount(ArrayList<Person> tempGroup)
     {
     	int count = 0;
@@ -217,6 +223,8 @@ public class Encounter {
     	}
     	return count;
     }
+	
+	//Gets the count of the normal people
     private static int getNormalPeopleCount(ArrayList<Person> tempGroup)
     {
     	int count = 0;
@@ -230,6 +238,8 @@ public class Encounter {
     	}
     	return count;
     }
+    
+    //Determines if they are zombies or people
     private static boolean isZombieGroup(ArrayList<Person> tempGroup)
     {
     	if(tempGroup.size()>0)

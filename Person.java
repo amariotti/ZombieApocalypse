@@ -21,22 +21,23 @@ public class Person {
     private Gun hasGun;
     
     
-    
+    // Default constructor
 	public Person()
 	{
 		
 	}
 	
+	// Makes random person with a pre-set infected status
     public Person(boolean infectedStatus)
     {
     	name = "fakeName";
-        health = RandNum.go(1,100);
-        if(infectedStatus)//for zombie
+        health = RandNum.go(1,100); // Random health
+        if(infectedStatus)// Zombies have specific health and speed
         {
         	 strength = RandNum.go(PersonStatsTypes.zombieStrengthNumerator,100);
         	 speed = RandNum.go(1,100)+PersonStatsTypes.zombieSpeedNumerator;
         }
-        else//for people
+        else // People have specific strength and speed
         {
         	 strength = RandNum.go(1,100);
         	 speed = RandNum.go(1,50);
@@ -50,13 +51,13 @@ public class Person {
         	 }
         }
        
-        
         hunger = RandNum.go(1,100);
         fatigue = RandNum.go(1,100);
         infected = infectedStatus;
-        ninjaSkill = RandNum.go(1,100);
+        ninjaSkill = RandNum.go(1,100); // Fighting skill, this was kind of a joke
     }
-
+    
+    // Person constructor that takes all parameters
     public Person(String name, int health, int strength, int hunger, int speed, int fatigue, boolean infected, int ninjaSkill) {
         this.name = name;
         this.health = health;
@@ -67,7 +68,8 @@ public class Person {
         this.infected = infected;
         this.ninjaSkill = ninjaSkill;
     }
-
+    
+    ////////// getters and setters //////////////////////
     public String getName() {
         return name;
     }
@@ -120,7 +122,7 @@ public class Person {
         return infected;
     }
 
-    public void setInfected(boolean infected) {
+    public void setInfected(boolean infected) { // This is for when the person turns to a zombie
         this.infected = infected;
         if(infected)
         {

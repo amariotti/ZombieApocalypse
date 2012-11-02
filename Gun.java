@@ -12,7 +12,7 @@ public class Gun extends Weapons{
     
     public Gun()
     {
-    	super(RandNum.go(1,10), RandNum.go(1,10), RandNum.go(1,10));
+    	super(RandNum.go(1,10), RandNum.go(25,50), RandNum.go(1,10));
         this.ammo = RandNum.go(1,40);
     }
 

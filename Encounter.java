@@ -41,12 +41,15 @@ public class Encounter {
     	}
     	
     }
+    
+    //////////This is for when we people vs people now just zombie vs person
     private static void zombieVsPerson(ArrayList<Person> zombies,ArrayList<Person> people )
     {
     	System.out.println("start zombieVsPerson");
+    	//this is if zombies2*people or military +people > zombie or45% random chance
     	while((((getMilitaryPeopleCount(people)*1.50) + getNormalPeopleCount(people)) > zombies.size() && zombies.size()>0)||people.size()*2<= zombies.size()||RandNum.go(1,100)<45)//fight
     	{
-    		if(zombies.size() == 0 || people.size() == 0)
+    		if(zombies.size() == 0 || people.size() == 0)//look to see if they are empty leave out
     		{
     			System.out.println("done");
     			return;
@@ -180,8 +183,16 @@ public class Encounter {
 		
 	}
 	private static int getWeponDamage(Person damagePerson) {
-		// TODO: Auto-generated method stub
-		return 0;
+		Gun tempgun = damagePerson.getHasGun();
+		if(tempgun!=null)
+		{
+			return tempgun.getPower();
+		}
+		else
+		{
+			return 0;
+		}
+		
 	}
 	private static int getMilitaryPeopleCount(ArrayList<Person> tempGroup)
     {

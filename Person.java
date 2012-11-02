@@ -18,6 +18,7 @@ public class Person {
     private int fatigue;
     private boolean infected;
     private int ninjaSkill;
+    private Gun hasGun;
     
     
     
@@ -30,15 +31,23 @@ public class Person {
     {
     	name = "fakeName";
         health = RandNum.go(1,100);
-        if(infectedStatus)
+        if(infectedStatus)//for zombie
         {
         	 strength = RandNum.go(PersonStatsTypes.zombieStrengthNumerator,100);
         	 speed = RandNum.go(1,100)+PersonStatsTypes.zombieSpeedNumerator;
         }
-        else
+        else//for people
         {
         	 strength = RandNum.go(1,100);
         	 speed = RandNum.go(1,50);
+        	 if (RandNum.goBool()) //Random bool to determine if this person has a weapon or not
+         		{
+        		 setHasGun(new Gun());
+         		}
+        	 else
+        	 {
+        		 setHasGun(null);
+        	 }
         }
        
         
@@ -137,5 +146,13 @@ public class Person {
     public void setNinjaSkill(int ninjaSkill) {
         this.ninjaSkill = ninjaSkill;
     }
+
+	public Gun getHasGun() {
+		return hasGun;
+	}
+
+	public void setHasGun(Gun hasGun) {
+		this.hasGun = hasGun;
+	}
 
 }

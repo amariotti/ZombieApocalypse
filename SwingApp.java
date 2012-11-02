@@ -25,7 +25,7 @@ public class SwingApp {
 	
 	static ArrayList<Person> alPerson = new ArrayList<Person>();
 	static ArrayList<Person> alZombie = new ArrayList<Person>();
-	private JTextField tfDayCount;
+	private JTextField tfRounds;
 	
 	public static void createIndividuals(int count, boolean infected)
     {
@@ -48,9 +48,9 @@ public class SwingApp {
 		}
     }
     
-    public static void outputIndividuals()
+    public static void outputIndividuals(int r)
     {
-    	System.out.println(); //Temporary hard return
+    	/*System.out.println(); //Temporary hard return
     	for(Person d:alPerson) {
     		textArea.append("Person: -- Health: " + d.getHealth() + ", Strength: " + d.getStrength() + ", Fatigue: " + d.getFatigue() + ", Hunger: " + d.getHunger() + "\n");
     	}
@@ -60,7 +60,9 @@ public class SwingApp {
         for(Person d:alZombie) {
         	//textArea.append("Zombie: -- Health: " + d.getHealth() + ", Strength: " + d.getStrength() + ", Fatigue: " + d.getFatigue() + ", Hunger: " + d.getHunger() + "\n");
         	scrollPane.add("Zombie: -- Health: " + d.getHealth() + ", Strength: " + d.getStrength() + ", Fatigue: " + d.getFatigue() + ", Hunger: " + d.getHunger() + "\n", scrollPane);
-        }
+        }*/
+    	
+    	textArea.append("End of Round: " + (r+1) + ". There are " + alPerson.size() + " people alive, and " + alZombie.size() + " zombies.\n");
     }
 	
 	/**
@@ -86,12 +88,12 @@ public class SwingApp {
 		initialize();
 		textArea.setText("");
 		
-		tfDayCount = new JTextField();
-		tfDayCount.setColumns(10);
-		tfDayCount.setBounds(154, 201, 134, 28);
-		frame.getContentPane().add(tfDayCount);
+		tfRounds = new JTextField();
+		tfRounds.setColumns(10);
+		tfRounds.setBounds(154, 201, 134, 28);
+		frame.getContentPane().add(tfRounds);
 		
-		JLabel lblHowManyDays = new JLabel("How many days would you like the battle to last?");
+		JLabel lblHowManyDays = new JLabel("How many rounds would you like the battle to last?");
 		lblHowManyDays.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHowManyDays.setBounds(20, 181, 407, 16);
 		frame.getContentPane().add(lblHowManyDays);
@@ -102,7 +104,7 @@ public class SwingApp {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 513);
+		frame.setBounds(100, 100, 450, 750);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -132,7 +134,7 @@ public class SwingApp {
 		frame.getContentPane().add(tfZombieCount);
 		
 		textArea = new JTextArea();
-		textArea.setBounds(31, 283, 383, 59);
+		textArea.setBounds(31, 283, 383, 421);
 		frame.getContentPane().add(textArea);
 		
 		JButton btnGo = new JButton("FIGHT!");
@@ -148,9 +150,12 @@ public class SwingApp {
 				createIndividuals(Integer.parseInt(tfPersonCount.getText()), true);
 				createIndividuals(Integer.parseInt(tfZombieCount.getText()), false);
 				
-				outputIndividuals();
-				Encounter.encounter(alPerson, alZombie);		        
-				outputIndividuals();
+				for(int i=0;i<Integer.parseInt(tfRounds.getText());i++)
+				{
+					Encounter.encounter(alPerson, alZombie);		        
+					outputIndividuals(i);			
+				}
+				
 			}
 		});
 		btnGo.setBounds(158, 246, 117, 29);

@@ -59,6 +59,7 @@ public class Encounter {
     		if( people.size() >0 && zombies.size()>0 )
     		{
     			//System.out.println("start if");
+    			
     			int personIndex = RandNum.go(0, people.size()-1);
         		int zombieIndex = RandNum.go(0, zombies.size()-1);
         		String whoWon = personZombieFight(people.get(personIndex),zombies.get(zombieIndex));
@@ -74,9 +75,18 @@ public class Encounter {
         		{
         			System.out.println("zombie won");
         			//might want to look to see if we can not convert based on health after we add weapons
-        			people.get(personIndex).setInfected(true);//make them zombie
-        			zombies.add(people.get(personIndex));//add to zombie array
-        			people.remove(personIndex);// take them out of person array
+        			if(people.get(personIndex).getHealth()<-15)//Ripped apart
+        			{
+        				people.remove(personIndex);// take them out of person array
+        			}
+        			else//converted
+        			{
+        				people.get(personIndex).setInfected(true);//make them zombie
+            			zombies.add(people.get(personIndex));//add to zombie array
+            			people.remove(personIndex);// take them out of person array
+        				
+        			}
+        			
         		
         		}
         		//System.out.println("if");

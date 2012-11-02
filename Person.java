@@ -30,8 +30,18 @@ public class Person {
     {
     	name = "fakeName";
         health = RandNum.go(1,100);
-        strength = RandNum.go(1,100);
-        speed = RandNum.go(1,100);
+        if(infectedStatus)
+        {
+        	 strength = RandNum.go(PersonStatsTypes.zombieStrengthNumerator,100);
+        	 speed = RandNum.go(1,100)+PersonStatsTypes.zombieSpeedNumerator;
+        }
+        else
+        {
+        	 strength = RandNum.go(1,100);
+        	 speed = RandNum.go(1,50);
+        }
+       
+        
         hunger = RandNum.go(1,100);
         fatigue = RandNum.go(1,100);
         infected = infectedStatus;
@@ -107,7 +117,15 @@ public class Person {
         {
         	setStrength(getStrength()+PersonStatsTypes.zombieStrengthNumerator);
         	setSpeed(getSpeed()+PersonStatsTypes.zombieSpeedNumerator);
-        	setHealth(getHealth()+ RandNum.go(1, 50));
+        	if(getHealth() > 0)//if - then make posotive first
+        	{
+        		setHealth((getHealth()*-1) + RandNum.go(1, 50));
+        	}
+        	else
+        	{
+        		setHealth(getHealth()+ RandNum.go(1, 50));
+        	}
+        	
         }
         
     }

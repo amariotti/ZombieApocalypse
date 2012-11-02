@@ -25,13 +25,13 @@ public class main {
     {
     	System.out.println(); //Temporary hard return
     	for(Person d:alPerson) {
-        	System.out.println("Person: -- Health: " + d.getHealth() + ", Strength: " + d.getStrength() + ", Fatigue: " + d.getFatigue() + ", Hunger: " + d.getHunger());
+        	System.out.println("Person: -- Health: " + d.getHealth() + ", skill: " + d.getNinjaSkill() + ", Fatigue: " + d.getFatigue() + ", Hunger: " + d.getHunger());
     	}
     	
     	System.out.println(); //Temporary hard return
     	
         for(Person d:alZombie) {
-        	System.out.println("Zombie: -- Health: " + d.getHealth() + ", Strength: " + d.getStrength() + ", Fatigue: " + d.getFatigue() + ", Hunger: " + d.getHunger());
+        	System.out.println("Zombie: -- Health: " + d.getHealth() + ", Strength: " + d.getStrength() + ", speed: " + d.getSpeed() + ", Hunger: " + d.getHunger());
         }
     }
 	
@@ -47,13 +47,20 @@ public class main {
 		
 		System.out.println("How many people would you like to create?");
 		int pCount = scan.nextInt();
+		
+		System.out.println("How many rounds would you like it to go?");
+		int pRound = scan.nextInt();
     	
 		createIndividuals(zCount, true);
 		createIndividuals(pCount, false);
-        
 		outputIndividuals();
-		Encounter.encounter(alPerson, alZombie);		        
-		outputIndividuals();
+		for(int i=0;i<=pRound;i++)
+		{
+			
+			Encounter.encounter(alPerson, alZombie);		        
+			outputIndividuals();			
+		}
+		
 		
         //Encounter.encounter(listOne,listOne);
         //run an encounter

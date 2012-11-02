@@ -1,13 +1,10 @@
 package ZombieApocalypse;
 
 import java.awt.EventQueue;
-import java.awt.List;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -21,7 +18,6 @@ public class SwingApp {
 	private JTextField tfPersonCount;
 	private JTextField tfZombieCount;
 	private static JTextArea textArea;
-	private static JScrollPane scrollPane;
 	
 	static ArrayList<Person> alPerson = new ArrayList<Person>();
 	static ArrayList<Person> alZombie = new ArrayList<Person>();
@@ -32,36 +28,16 @@ public class SwingApp {
     	for (int i = 0; i < count; i++)
         {
     		Person individual = new Person(infected);
-    		ArrayList<Gun> alGuns = new ArrayList<Gun>();
     		
     		if (infected == true)
     			alZombie.add(individual);
     		else
     			alPerson.add(individual);
-    		
-//    		if (RandNum.goBool()) //Random bool to determine if this person/zombie has a weapon or not
-//    		{
-//    			Gun g = new Gun();
-//    			alGuns.add(g);
-//    			textArea.append("Gun: -- Durability: " + g.getDurability() + ", Power: " + g.getPower() + ", Range: " + g.getRange() + "\n");
-//    		}
 		}
     }
     
     public static void outputIndividuals(int r)
     {
-    	/*System.out.println(); //Temporary hard return
-    	for(Person d:alPerson) {
-    		textArea.append("Person: -- Health: " + d.getHealth() + ", Strength: " + d.getStrength() + ", Fatigue: " + d.getFatigue() + ", Hunger: " + d.getHunger() + "\n");
-    	}
-    	
-    	System.out.println(); //Temporary hard return
-    	
-        for(Person d:alZombie) {
-        	//textArea.append("Zombie: -- Health: " + d.getHealth() + ", Strength: " + d.getStrength() + ", Fatigue: " + d.getFatigue() + ", Hunger: " + d.getHunger() + "\n");
-        	scrollPane.add("Zombie: -- Health: " + d.getHealth() + ", Strength: " + d.getStrength() + ", Fatigue: " + d.getFatigue() + ", Hunger: " + d.getHunger() + "\n", scrollPane);
-        }*/
-    	
     	textArea.append("End of Round: " + (r+1) + ". There are " + alPerson.size() + " people alive, and " + alZombie.size() + " zombies.\n");
     }
 	
@@ -147,12 +123,19 @@ public class SwingApp {
 				alPerson.clear();
 				alZombie.clear();
 				
+				//Creates people based on the count given by the user
 				createIndividuals(Integer.parseInt(tfPersonCount.getText()), true);
+				
+				//Creates zombies based on the count given by the user
 				createIndividuals(Integer.parseInt(tfZombieCount.getText()), false);
 				
+				//Runs the encounter based on the rounds given by the user
 				for(int i=0;i<Integer.parseInt(tfRounds.getText());i++)
 				{
+					//Run the encounter method and passes in both arraylists
 					Encounter.encounter(alPerson, alZombie);		        
+					
+					//Outputs the round counts to the console
 					outputIndividuals(i);			
 				}
 				
